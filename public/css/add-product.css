@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+body{
+    background-color: rgb(236, 240, 240);
+}
+
+.add-products{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4%;
+}
+.add-products-form{
+    display: flex;
+    font-size: 1.2em;
+    flex-direction: column;
+    width: 30%;
+
+   
+}
+
+.p-name,.p-desc,.p-price,.p-cat,.p-img,.add-product,.p-stock{
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: white;
+    text-transform:capitalize;
+    font-size: 1.2em;
+}
+
+.add-product{
+    border: none;
+    background-color: rgb(90, 180, 90);
+    padding: 2%;
+    font-size: 1.5em;
+    color: black;
+}

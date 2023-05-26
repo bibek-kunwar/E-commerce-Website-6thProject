@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <!-- navbar -->
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="login.html" id="login-btn" class="fas fa-user"></a>
+          <div class="user-details"></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+          <a href="#category">category</a>
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+    <!-- end of navbar -->
+
+    <table style="font-size: 20px">
+      <tr>
+        <th>Product Name</th>
+        <th>Buyer Name</th>
+        <th>State</th>
+        <th>Quantity</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Status</th>
+      </tr>
+      <tbody class="orders"></tbody>
+    </table>
+
+    <script>
+      const token = JSON.parse(localStorage.getItem("token"));
+      const orders = document.querySelector(".orders");
+      const dashboard = document.querySelector(".dashboard");
+      let searchValue;
+      if (token.role == "admin") {
+        dashboard.style.display = "block";
+      }
+      searchForm = document.querySelector(".search-form");
+      searchInput = document.querySelector(".search");
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        searchValue = searchInput.value;
+        window.location.href = `../searchPage.html?name=${searchValue}`;
+      });
+
+      const showOrders = async (e) => {
+        e.preventDefault();
+        if (token.role == "admin") {
+          try {
+            const { data } = await axios.get(
+              "http://localhost:3000/api/v1/order/customers",
+              { headers: { Authorization: `Bearer ${token.token}` } }
+            );
+            console.log(data);
+            let productId = [];
+            productId = data.orders.map((d) => d.productId);
+            let productName = [];
+
+            for (let i = 0; i < productId.length; i++) {
+              let {
+                data: { product },
+              } = await axios.get(
+                `http://localhost:3000/api/v1/products/${productId[i]}`
+              );
+              productName.push(product.p_name);
+            }
+
+            let status = [];
+
+            for (let i = 0; i < data.orders.length; i++) {
+              orders.innerHTML += `<tr data-id="${data.orders[i]._id}">
+                      <td>${productName[i]}</td>
+                      <td>${data.orders[i].firstname} ${data.orders[i].lastname}</td>
+                      <td>${data.orders[i].state}</td>
+                      <td>${data.orders[i].quantity}</td>
+                      <td>${data.orders[i].city}</td>
+                      <td>${data.orders[i].phone}</td>
+                      <td>${data.orders[i].email}</td>
+                      <td>
+                          <select class="status"id="${data.orders[i]._id}" value=${data.orders[i].status}>
+                              <option value="processing">Processing</option>
+                              <option value="delivered">Delivered</option>
+                          </select></td>
+                          <td>
+                          <a class="delete" style="cursor:pointer">Delete</a>  
+                          </td>
+  
+                    </tr>`;
+
+              status.push(data.orders[i].status);
+            }
+            console.log(status);
+
+            const statusBtn = document.querySelectorAll(".status");
+            const deleteBtn = document.querySelectorAll(".delete");
+
+            deleteBtn.forEach((btn) => {
+              btn.addEventListener("click", async (e) => {
+                const orderId =
+                  e.currentTarget.parentElement.parentElement.dataset.id;
+
+                try {
+                  const { data } = await axios.delete(
+                    "http://localhost:3000/api/v1/order",
+                    {
+                      headers: { Authorization: `Bearer ${token.token}` },
+                      data: { orderId: orderId },
+                    }
+                  );
+                  alert("Order deleted successfully!");
+                  window.location.href = "./customer-order.html";
+                } catch (err) {
+                  console.log(err);
+                }
+              });
+            });
+
+            for (let i = 0; i < status.length; i++) {
+              statusBtn[i].value = status[i];
+            }
+
+            for (let i = 0; i < statusBtn.length; i++) {
+              statusBtn[i].addEventListener("change", async (e) => {
+                status[i] = statusBtn[i].value;
+
+                if (status[i] == "delivered") {
+                  const orderId =
+                    e.currentTarget.parentElement.parentElement.dataset.id;
+
+                  if (token) {
+                    const { data } = await axios.patch(
+                      "http://localhost:3000/api/v1/order",
+                      { orderId: orderId, status: "delivered" },
+                      {
+                        headers: { Authorization: `Bearer ${token.token}` },
+                      }
+                    );
+                    statusBtn[i].disabled = true;
+                    window.location.href = "./customer-order.html";
+                  }
+                }
+              });
+            }
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", showOrders);
+    </script>
+  </body>
+</html>

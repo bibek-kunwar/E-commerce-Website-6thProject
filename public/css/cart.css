@@ -1,0 +1,134 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+/* Color Variables */
+:root {
+  --white: #fff;
+  --black: #222;
+  --green: #6cbe02;
+  --grey1: #f0f0f0;
+  --grey2: #e9d7d3;
+}
+
+/* Basic Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 70.5%;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.6rem;
+  background-color: var(--white);
+  color: var(--black);
+  font-weight: 400;
+  font-style: normal;
+}
+.heading{
+  text-align: center;
+  color:var(--black);
+  text-transform: uppercase;
+  padding:1rem;
+  font-size: 3.5rem;
+  padding-bottom: 2rem;
+}
+
+.heading span{
+  color:var(--green);
+  text-transform: uppercase;
+}
+
+
+
+
+
+/* Cart Items */
+.cart {
+  margin: 5rem auto;
+}
+
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+th {
+  text-align: left;
+  padding: 0.5rem;
+  color: #fff;
+  background-color: var(--green);
+  font-weight: normal;
+}
+
+td {
+  padding: 1rem 0.5rem;
+ 
+}
+
+td input {
+  width: 5rem;
+  height: 3rem;
+  padding: 0.5rem;
+}
+
+td a {
+  color: orangered;
+  font-size: 1.4rem;
+}
+
+td img {
+  width: 8rem;
+  height: 8rem;
+  margin-right: 1rem;
+}
+
+.total-price {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+.total-price table {
+  border-top: 3px solid var(--green);
+  width: 100%;
+  max-width: 35rem;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+th:last-child {
+  text-align: right;
+}
+
+.checkout {
+  display: inline-block;
+  background-color: var(--green);
+  color: white;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+
+@media only screen and (max-width: 567px) {
+  .cart-info p {
+    display: none;
+  }
+}
+

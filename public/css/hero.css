@@ -1,0 +1,150 @@
+/* Hero */
+.hero {
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .swiper-container,
+  .hero .row {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .hero .row {
+    position: relative;
+  }
+  
+  .hero .row img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .hero .row .content {
+    position: absolute;
+    top: 50%;
+    left: 80px;
+    transform: translateY(-50%);
+  }
+  
+  .hero .row .content h1 {
+    line-height: 1.2;
+    font-size: 5rem;
+    font-weight: 700;
+  }
+  
+  .hero .row .content span {
+    color: var(--primary);
+  }
+  
+  .hero .row .content p {
+    margin: 1rem 0 1rem;
+    width: 70%;
+  }
+  
+  .hero .row .content a {
+    display: inline-block;
+    color: var(--white);
+    background-color: var(--primary);
+    border-radius: 5px;
+    padding: 1rem 2.5rem;
+    margin-top: 2rem;
+  }
+  
+  .swiper-slide-active .content h1 {
+    animation: movebottom 1s ease-in-out;
+  }
+  
+  .swiper-slide-active .content a {
+    animation: movetop 1s ease-in-out;
+  }
+  
+  .swiper-slide-active .content p {
+    animation: moveleft 1s ease-in-out;
+  }
+  
+  @keyframes movebottom {
+    0% {
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes movetop {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes moveleft {
+    0% {
+      transform: translateX(-100px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
+  
+  .hero .arrows {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 500ms ease-out;
+  }
+  
+  .hero:hover .arrows {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .arrows .swiper-prev,
+  .arrows .swiper-next {
+    position: absolute;
+    padding: 0.5rem 0.7rem;
+    background-color: var(--primary);
+    border-radius: 5px;
+    color: var(--white);
+    cursor: pointer;
+  }
+  
+  .arrows .swiper-prev {
+    left: 20px;
+  }
+  
+  .arrows .swiper-next {
+    right: 20px;
+  }
+  
+  @media (max-width: 567px) {
+    .hero .row .content {
+      left: 20px;
+    }
+  
+    .hero .row .content h1 {
+      font-size: 3rem;
+    }
+    .hero .row .content p {
+      width: 80%;
+    }
+  }
+  
+  

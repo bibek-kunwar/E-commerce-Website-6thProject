@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/productbrandfooter.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.8/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="Assest/favicon.png" type="image/png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"
+    />
+
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Our Gloccery</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+          <div id="login-btn" class="fas fa-user"></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+          <a href="#category">category</a>
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Login -->
+    <div class="container">
+      <div class="login-form">
+        <form action="" class="category-form">
+          <h1>Add Category</h1>
+          <p class="error-class"></p>
+          <label for="category">Category</label>
+          <input
+            type="text"
+            placeholder="Enter Category"
+            class="category"
+            name="category"
+            required
+          />
+
+          <div class="buttons">
+            <button type="submit" class="catbtn">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ======== SwiperJS ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="./js/slider.js"></script>
+    <script src="./js/signup.js"></script>
+
+    <script>
+      const token = JSON.parse(localStorage.getItem("token"));
+
+      if (token.role == "admin") {
+        dashboard.style.display = "block";
+      }
+      const dashboard = document.querySelector(".dashboard");
+      let searchValue;
+      searchForm = document.querySelector(".search-form");
+      searchInput = document.querySelector(".search");
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        searchValue = searchInput.value;
+        window.location.href = `../searchPage.html?name=${searchValue}`;
+      });
+
+      const addCategory = async (e) => {
+        e.preventDefault();
+        const catName = document.querySelector(".category").value;
+        console.log(catName);
+        if (token.role == "admin") {
+          try {
+            const { data } = await axios.post(
+              "http://localhost:3000/api/v1/category",
+              { name: catName },
+              { headers: { Authorization: `Bearer ${token.token}` } }
+            );
+            alert("Category added successfully!!");
+            window.location.href = "./index.html";
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      };
+      const catForm = document.querySelector(".category-form");
+      catForm.addEventListener("submit", addCategory);
+    </script>
+  </body>
+</html>

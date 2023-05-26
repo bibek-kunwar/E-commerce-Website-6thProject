@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.8/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="Assest/favicon.png" type="image/png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"
+    />
+
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="login.html" id="login-btn" class="fas fa-user"></a>
+          <div class="user-details"></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+    <br />
+    <table style="font-size: 20px">
+      <tr>
+        <th>Product Name</th>
+        <th>Buyer Name</th>
+        <th>State</th>
+        <th>Quantity</th>
+        <th>City</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      <tbody class="orders"></tbody>
+    </table>
+    <!-- js -->
+    <script>
+      const token = JSON.parse(localStorage.getItem("token"));
+      const orders = document.querySelector(".orders");
+      const dashboard = document.querySelector(".dashboard");
+      let searchValue;
+      if (token.role == "admin") {
+        dashboard.style.display = "block";
+      }
+      searchForm = document.querySelector(".search-form");
+      searchInput = document.querySelector(".search");
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        searchValue = searchInput.value;
+        window.location.href = `../searchPage.html?name=${searchValue}`;
+      });
+      const showOrders = async () => {
+        if (token) {
+          try {
+            const { data } = await axios.get(
+              "http://localhost:3000/api/v1/order",
+              { headers: { Authorization: `Bearer ${token.token}` } }
+            );
+            let productId = [];
+            productId = data.orders.map((d) => d.productId);
+            let productName = [];
+
+            for (let i = 0; i < productId.length; i++) {
+              let {
+                data: { product },
+              } = await axios.get(
+                `http://localhost:3000/api/v1/products/${productId[i]}`
+              );
+              productName.push(product.p_name);
+            }
+
+            for (let i = 0; i < data.orders.length; i++) {
+              orders.innerHTML += `<tr data-id="${data.orders[i]._id}">
+                    <td>${productName[i]}</td>
+                    <td>${data.orders[i].firstname} ${data.orders[i].lastname}</td>
+                    <td>${data.orders[i].state}</td>
+                    <td>${data.orders[i].quantity}</td>
+                    <td>${data.orders[i].city}</td>
+                    <td>${data.orders[i].phone}</td>
+                    <td>${data.orders[i].email}</td>
+                    <td>${data.orders[i].status}</td>
+                    <td>
+                        <a href="./editOrder.html?id=${data.orders[i]._id}">Edit</a>
+                        <p class="delete" style="cursor:pointer;">Delete</p>
+                    </td>
+                </tr>`;
+            }
+
+            const deleteBtns = document.querySelectorAll(".delete");
+            deleteBtns.forEach((btn) => {
+              btn.addEventListener("click", deleteOrder);
+            });
+          } catch (err) {
+            console.log(err);
+          }
+        }
+      };
+
+      const deleteOrder = async (e) => {
+        const orderId = e.currentTarget.parentElement.parentElement.dataset.id;
+        if (token) {
+          const { data } = await axios.delete(
+            "http://localhost:3000/api/v1/order",
+            {
+              headers: { Authorization: `Bearer ${token.token}` },
+              data: { orderId: orderId },
+            }
+          );
+          alert("Your order has been deleted successfully!");
+          window.location.href = "./ordersList.html";
+        }
+      };
+
+      window.addEventListener("DOMContentLoaded", showOrders);
+    </script>
+  </body>
+</html>

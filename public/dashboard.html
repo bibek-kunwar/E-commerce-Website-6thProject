@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/dashboard.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- navbar -->
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="login.html" id="login-btn" class="fas fa-user"></a>
+          <div class="user-details"></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+          <a href="#category">category</a>
+
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+          <a href="./add-product.html" class="add-product">Add product</a>
+          <a href="./addCategory.html" class="add-category">Add category</a>
+          <a href="./customer-order.html">Customer orders</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- end of navbar -->
+    <h1>Your Products</h1>
+    <div class="your-products"></div>
+    <!-- js -->
+    <script src="./js/dashboard.js"></script>
+  </body>
+</html>

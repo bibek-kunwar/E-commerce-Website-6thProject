@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/productbrandfooter.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.8/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="Assest/favicon.png" type="image/png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"
+    />
+
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Our Gloccery</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+          <div id="login-btn" class="fas fa-user"></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Login -->
+    <div class="container">
+      <div class="login-form">
+        <form action="" class="signup-form">
+          <h1>Login</h1>
+          <p class="error-class"></p>
+          <label for="email">Email</label>
+          <input
+            type="text"
+            placeholder="Enter Email"
+            class="email"
+            name="email"
+            required
+          />
+
+          <label for="psw">Password</label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="psw"
+            class="password"
+            required
+          />
+
+          <p>
+            Fill the data into form or
+            <a href="login.html">Login</a>
+          </p>
+
+          <div class="buttons">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ======== SwiperJS ======= -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.js"></script>
+    <!-- Custom Scripts -->
+    <script src="./js/slider.js"></script>
+    <script src="./js/signup.js"></script>
+  </body>
+</html>

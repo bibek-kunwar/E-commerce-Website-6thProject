@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/productfooter" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.8/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="Assest/favicon.png" type="image/png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.7.5/swiper-bundle.min.css"
+    />
+
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            class="search"
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="login.html" id="login-btn" class="fas fa-user"></a>
+          <div class="user-details"></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- js -->
+    <script>
+      const navFunction = () => {
+        const token = JSON.parse(localStorage.getItem("token"));
+        const dashboard = document.querySelector(".dashboard");
+        if (token.role == "admin") {
+          dashboard.style.display = "block";
+        }
+        searchForm = document.querySelector(".search-form");
+        searchInput = document.querySelector(".search");
+        searchForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          searchValue = searchInput.value;
+          window.location.href = `../searchPage.html?name=${searchValue}`;
+        });
+      };
+    </script>
+  </body>
+</html>

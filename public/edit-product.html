@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Product</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <style>
+      body {
+        background-color: rgb(232, 255, 247);
+      }
+
+      .edit-form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2%;
+      }
+      .edit-form {
+        width: 50%;
+      }
+      .p-name,
+      .p-desc,
+      .p-price,
+      .p-cat,
+      .p-img,
+      .add-product,
+      .p-stock,
+      .update-product {
+        height: 40px;
+        width: 100%;
+        border-radius: 5px;
+        background-color: white;
+        text-transform: capitalize;
+        font-size: 1.2em;
+      }
+
+      .update-product {
+        border: none;
+        background-color: rgb(90, 180, 90);
+        padding: 2%;
+        font-size: 1.5em;
+        color: black;
+      }
+      .preview-images {
+        display: flex;
+      }
+
+      .cancel {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+    <header class="header">
+      <div class="header-1">
+        <a href="#" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            placeholder="search here..."
+            id="search-box"
+            class="search"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="cart.html" class="fas fa-shopping-cart"></a>
+          <a href="login.html" id="login-btn" class="fas fa-user"></a>
+          <div class="user-details"></div>
+          <div></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+    <!-- end of navbar -->
+
+    <!-- edit-form-container -->
+    <div class="edit-form-container">
+      <div class="error-class"></div>
+      <form class="edit-products-form">
+        <div class="name">
+          <label for="">Product Name:</label>
+          <br />
+          <input type="text" class="p-name" />
+        </div>
+        <br />
+        <br />
+        <div class="desc">
+          <label for="">Product Description:</label>
+          <br />
+          <input type="text" class="p-desc" />
+        </div>
+        <br />
+        <div class="price">
+          <label for="">Product Price:</label>
+          <br />
+          <input type="text" class="p-price" />
+        </div>
+        <br />
+
+        <div class="stock">
+          <label for="">Product Stock:</label>
+          <br />
+          <input type="text" class="p-stock" />
+        </div>
+        <br />
+        <div class="img">
+          <label for="">Product Image:</label>
+          <br />
+          <input type="file" class="p-img" multiple />
+          <p class="preview-img"></p>
+        </div>
+        <br />
+        <div class="preview-images"></div>
+        <div class="category">
+          <label for="">Select Category:</label>
+          <br />
+          <select name="" class="p-cat"></select>
+        </div>
+        <br />
+        <button type="submit" class="update-product">Update</button>
+        <br />
+        <br />
+      </form>
+    </div>
+    <!-- end of edit-form-container -->
+
+    <!-- js -->
+    <script src="./js/edit-product.js"></script>
+  </body>
+</html>

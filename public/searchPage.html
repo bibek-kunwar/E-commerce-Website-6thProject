@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link
+      href="https://unpkg.com/boxicons@2.0.8/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- axios -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"
+      integrity="sha512-xIPqqrfvUAc/Cspuj7Bq0UtHNo/5qkdyngx6Vwt+tmbvTLDszzXM0G6c91LXmGrRx8KEPulT+AfOOez+TeVylg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="Assest/favicon.png" type="image/png" />
+
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-1">
+        <a href="index.html" class="logo"
+          ><img src="Assest/ecommerce-logo-png-11.png" height="45px"
+        /></a>
+
+        <form action="" class="search-form">
+          <input
+            type="search"
+            name=""
+            class="search"
+            placeholder="search here..."
+            id="search-box"
+          />
+          <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="icons">
+          <div id="search-btn" class="fas fa-search"></div>
+          <a href="#" class="fas fa-heart"></a>
+          <a href="#" class="fas fa-shopping-cart"></a>
+          <div id="login-btn" class="fas fa-user"></div>
+        </div>
+      </div>
+
+      <div class="header-2">
+        <nav class="navbar">
+          <a href="./index.html">home</a>
+          <a href="#category">category</a>
+          <a href="cart.html">Cart</a>
+          <a href="./ordersList.html">Orders</a>
+          <a href="./dashboard.html" class="dashboard" style="display: none"
+            >Dashboard</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- product section -->
+    <p class="result" style="font-size: 1.5rem"></p>
+    <div class="product">
+      <div class="product-box-container">
+        <!-- <div class="box" data-id="${product._id}">
+        <a href="../singleProduct.html?id=${product._id}"><img src="${product.img[0].url}" alt="">
+       </a>
+        
+        <p class="product-name">${product.p_name}</p>
+        <p class="product-price">Rs.${product.price}</p>
+        <button href="" class="btn">add to cart</button>
+    </div> -->
+      </div>
+    </div>
+    <!-- end of product section -->
+
+    <script src="./js/searchPage.js"></script>
+  </body>
+</html>
